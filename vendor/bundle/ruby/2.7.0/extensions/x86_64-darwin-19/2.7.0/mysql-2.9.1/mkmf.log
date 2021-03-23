@@ -1,0 +1,977 @@
+find_library: checking for mysql_query() in -lmysqlclient... -------------------- no
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib     -lruby.2.7   "
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: int main(int argc, char **argv)
+4: {
+5:   return !!argv[argc];
+6: }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib     -lruby.2.7 -lmysqlclient   "
+conftest.c:14:57: error: use of undeclared identifier 'mysql_query'
+int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+                                                        ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib     -lruby.2.7 -lmysqlclient   "
+ld: library not found for -lmysqlclient
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: extern void mysql_query();
+15: int t(void) { mysql_query(); return 0; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib     -lruby.2.7 -lmysqlclient   "
+conftest.c:14:57: error: use of undeclared identifier 'mysql_query'
+int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+                                                        ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib     -lruby.2.7 -lmysqlclient   "
+ld: library not found for -lmysqlclient
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: extern void mysql_query();
+15: int t(void) { mysql_query(); return 0; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L/usr/local/lib/mysql -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib     -lruby.2.7 -lmysqlclient   "
+conftest.c:14:57: error: use of undeclared identifier 'mysql_query'
+int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+                                                        ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L/usr/local/lib/mysql -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib     -lruby.2.7 -lmysqlclient   "
+ld: warning: directory not found for option '-L/usr/local/lib/mysql'
+ld: library not found for -lmysqlclient
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: extern void mysql_query();
+15: int t(void) { mysql_query(); return 0; }
+/* end */
+
+--------------------
+
+have_library: checking for -lm... -------------------- yes
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib     -lruby.2.7 -lm   "
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: 
+15: int t(void) { ; return 0; }
+/* end */
+
+--------------------
+
+find_library: checking for mysql_query() in -lmysqlclient... -------------------- no
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lm  -lruby.2.7 -lmysqlclient -lm   "
+conftest.c:14:57: error: use of undeclared identifier 'mysql_query'
+int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+                                                        ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lm  -lruby.2.7 -lmysqlclient -lm   "
+ld: library not found for -lmysqlclient
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: extern void mysql_query();
+15: int t(void) { mysql_query(); return 0; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lm  -lruby.2.7 -lmysqlclient -lm   "
+conftest.c:14:57: error: use of undeclared identifier 'mysql_query'
+int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+                                                        ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lm  -lruby.2.7 -lmysqlclient -lm   "
+ld: library not found for -lmysqlclient
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: extern void mysql_query();
+15: int t(void) { mysql_query(); return 0; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L/usr/local/lib/mysql -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lm  -lruby.2.7 -lmysqlclient -lm   "
+conftest.c:14:57: error: use of undeclared identifier 'mysql_query'
+int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+                                                        ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L/usr/local/lib/mysql -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lm  -lruby.2.7 -lmysqlclient -lm   "
+ld: warning: directory not found for option '-L/usr/local/lib/mysql'
+ld: library not found for -lmysqlclient
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: extern void mysql_query();
+15: int t(void) { mysql_query(); return 0; }
+/* end */
+
+--------------------
+
+have_library: checking for -lz... -------------------- yes
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lm  -lruby.2.7 -lz -lm   "
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: 
+15: int t(void) { ; return 0; }
+/* end */
+
+--------------------
+
+find_library: checking for mysql_query() in -lmysqlclient... -------------------- no
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+conftest.c:14:57: error: use of undeclared identifier 'mysql_query'
+int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+                                                        ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+ld: library not found for -lmysqlclient
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: extern void mysql_query();
+15: int t(void) { mysql_query(); return 0; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+conftest.c:14:57: error: use of undeclared identifier 'mysql_query'
+int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+                                                        ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+ld: library not found for -lmysqlclient
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: extern void mysql_query();
+15: int t(void) { mysql_query(); return 0; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L/usr/local/lib/mysql -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+conftest.c:14:57: error: use of undeclared identifier 'mysql_query'
+int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+                                                        ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L/usr/local/lib/mysql -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+ld: warning: directory not found for option '-L/usr/local/lib/mysql'
+ld: library not found for -lmysqlclient
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: extern void mysql_query();
+15: int t(void) { mysql_query(); return 0; }
+/* end */
+
+--------------------
+
+have_library: checking for -lsocket... -------------------- no
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lsocket -lz -lm   "
+ld: library not found for -lsocket
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: 
+15: int t(void) { ; return 0; }
+/* end */
+
+--------------------
+
+find_library: checking for mysql_query() in -lmysqlclient... -------------------- no
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+conftest.c:14:57: error: use of undeclared identifier 'mysql_query'
+int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+                                                        ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+ld: library not found for -lmysqlclient
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: extern void mysql_query();
+15: int t(void) { mysql_query(); return 0; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+conftest.c:14:57: error: use of undeclared identifier 'mysql_query'
+int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+                                                        ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+ld: library not found for -lmysqlclient
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: extern void mysql_query();
+15: int t(void) { mysql_query(); return 0; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L/usr/local/lib/mysql -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+conftest.c:14:57: error: use of undeclared identifier 'mysql_query'
+int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+                                                        ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L/usr/local/lib/mysql -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+ld: warning: directory not found for option '-L/usr/local/lib/mysql'
+ld: library not found for -lmysqlclient
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: extern void mysql_query();
+15: int t(void) { mysql_query(); return 0; }
+/* end */
+
+--------------------
+
+have_library: checking for -lnsl... -------------------- no
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lnsl -lz -lm   "
+ld: library not found for -lnsl
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: 
+15: int t(void) { ; return 0; }
+/* end */
+
+--------------------
+
+find_library: checking for mysql_query() in -lmysqlclient... -------------------- no
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+conftest.c:14:57: error: use of undeclared identifier 'mysql_query'
+int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+                                                        ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+ld: library not found for -lmysqlclient
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: extern void mysql_query();
+15: int t(void) { mysql_query(); return 0; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+conftest.c:14:57: error: use of undeclared identifier 'mysql_query'
+int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+                                                        ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+ld: library not found for -lmysqlclient
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: extern void mysql_query();
+15: int t(void) { mysql_query(); return 0; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L/usr/local/lib/mysql -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+conftest.c:14:57: error: use of undeclared identifier 'mysql_query'
+int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+                                                        ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L/usr/local/lib/mysql -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+ld: warning: directory not found for option '-L/usr/local/lib/mysql'
+ld: library not found for -lmysqlclient
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: extern void mysql_query();
+15: int t(void) { mysql_query(); return 0; }
+/* end */
+
+--------------------
+
+have_library: checking for -lmygcc... -------------------- no
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmygcc -lz -lm   "
+ld: library not found for -lmygcc
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: 
+15: int t(void) { ; return 0; }
+/* end */
+
+--------------------
+
+find_library: checking for mysql_query() in -lmysqlclient... -------------------- no
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+conftest.c:14:57: error: use of undeclared identifier 'mysql_query'
+int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+                                                        ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+ld: library not found for -lmysqlclient
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: extern void mysql_query();
+15: int t(void) { mysql_query(); return 0; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+conftest.c:14:57: error: use of undeclared identifier 'mysql_query'
+int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+                                                        ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+ld: library not found for -lmysqlclient
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: extern void mysql_query();
+15: int t(void) { mysql_query(); return 0; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L/usr/local/lib/mysql -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+conftest.c:14:57: error: use of undeclared identifier 'mysql_query'
+int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+                                                        ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: int t(void) { void ((*volatile p)()); p = (void ((*)()))mysql_query; return !p; }
+/* end */
+
+"clang -o conftest -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/x86_64-darwin19 -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0/ruby/backward -I/Users/zack/.asdf/installs/ruby/2.7.1/include/ruby-2.7.0 -I. -I/usr/local/include -I/Users/zack/.asdf/installs/ruby/2.7.1/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wmissing-noreturn -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens  -fno-common -pipe conftest.c  -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib -L/usr/local/lib -L/usr/local/lib/mysql -L. -L/Users/zack/.asdf/installs/ruby/2.7.1/lib  -fstack-protector-strong -L/usr/local/lib    -lz -lm  -lruby.2.7 -lmysqlclient -lz -lm   "
+ld: warning: directory not found for option '-L/usr/local/lib/mysql'
+ld: library not found for -lmysqlclient
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: extern void mysql_query();
+15: int t(void) { mysql_query(); return 0; }
+/* end */
+
+--------------------
+

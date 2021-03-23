@@ -2,7 +2,6 @@ class CreateUsersTable < ActiveRecord::Migration
   def self.up
     create_table :users do |t|
       t.id         :id
-      t.references :hero, index: true, foreign_key: true, null: true
       t.string     :username
       t.string     :uid
       t.timestamps null: false

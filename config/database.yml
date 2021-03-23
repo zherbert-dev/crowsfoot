@@ -1,2 +1,4 @@
-adapter: 'sqlite3'
-database: 'test.db'
+adapter: 'mysql2',
+host: 'localhost',
+username: 'root',
+database: 'crowsfoot'

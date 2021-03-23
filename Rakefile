@@ -8,14 +8,13 @@
 require "active_record"
 
 namespace :db do
-
-  db_config       = YAML::load(File.open('config/database.yml'))
-  db_config_admin = db_config.merge({'database' => 'sqlite3', 'schema_search_path' => 'public'})
+  db_config_file = File.open('database.yaml')
+  db_config = YAML::load(db_config_file)
 
   desc "Create the database"
   task :create do
-    ActiveRecord::Base.establish_connection(db_config_admin)
-    ActiveRecord::Base.connection.create_database(db_config["database"])
+    ActiveRecord::Base.establish_connection(db_config)
+    # ActiveRecord::Base.connection.create_database(db_config["database"])
     puts "Database created."
   end
 
