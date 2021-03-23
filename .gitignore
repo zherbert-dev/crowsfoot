@@ -1,0 +1,10 @@
+.env
+mutagen.yml.lock
+.bundle/
+bin/*
+.yardoc
+coverage
+*.swp
+tags
+doc/*
+.vscode/
