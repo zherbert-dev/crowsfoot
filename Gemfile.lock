@@ -22,7 +22,6 @@ GEM
     pry (0.14.0)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    rake (13.0.3)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     zeitwerk (2.4.2)
@@ -34,7 +33,6 @@ DEPENDENCIES
   activerecord
   mysql2
   pry
-  rake
 
 BUNDLED WITH
    2.1.4

@@ -5,40 +5,46 @@
 # $ rake db:schema # creates a schema file of the current database
 # $ rake g:migration your_migration # generates a new migration file
 
+require 'rubygems'
+require 'bundler/setup'
+Bundler.require(:default)
+
 require "active_record"
 
 namespace :db do
-  db_config_file = File.open('database.yaml')
-  db_config = YAML::load(db_config_file)
-
+  db_config_file = File.open('./config/database.yml')
+  db_config = YAML::load(db_config_file)['production']
   desc "Create the database"
-  task :create do
+  task :connect do
     ActiveRecord::Base.establish_connection(db_config)
-    # ActiveRecord::Base.connection.create_database(db_config["database"])
+  end
+  task :create do
+    config = db_config.dup
+    database = config.delete('database')
+    ActiveRecord::Base.establish_connection(config)
+    ActiveRecord::Base.connection.create_database(database)
     puts "Database created."
   end
 
   desc "Migrate the database"
-  task :migrate do
-    ActiveRecord::Base.establish_connection(db_config)
+  task :migrate => :connect do
     ActiveRecord::Migrator.migrate("db/migrate/")
     Rake::Task["db:schema"].invoke
     puts "Database migrated."
   end
 
   desc "Drop the database"
-  task :drop do
-    ActiveRecord::Base.establish_connection(db_config_admin)
+  task :drop => :connect do
+    puts ActiveRecord::Base.connection.inspect
     ActiveRecord::Base.connection.drop_database(db_config["database"])
     puts "Database deleted."
   end
 
   desc "Reset the database"
-  task :reset => [:drop, :create, :migrate]
+  task :reset => ['db:drop', 'db:create', 'db:migrate']
 
   desc 'Create a db/schema.rb file that is portable against any DB supported by AR'
-  task :schema do
-    ActiveRecord::Base.establish_connection(db_config)
+  task :schema => :connect do
     require 'active_record/schema_dumper'
     filename = "db/schema.rb"
     File.open(filename, "w:utf-8") do |file|
