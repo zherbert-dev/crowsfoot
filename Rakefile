@@ -28,7 +28,7 @@ namespace :db do
 
   desc "Migrate the database"
   task :migrate => :connect do
-    ActiveRecord::Migrator.migrate("db/migrate/")
+    ActiveRecord::MigrationContext.new("db/migrate/", ActiveRecord::SchemaMigration).migrate
     Rake::Task["db:schema"].invoke
     puts "Database migrated."
   end
@@ -51,7 +51,6 @@ namespace :db do
       ActiveRecord::SchemaDumper.dump(ActiveRecord::Base.connection, file)
     end
   end
-
 end
 
 namespace :g do
@@ -64,7 +63,7 @@ namespace :g do
 
     File.open(path, 'w') do |file|
       file.write <<-EOF
-class #{migration_class} < ActiveRecord::Migration
+class #{migration_class} < ActiveRecord::Migration[6.0]
   def self.up
   end
   def self.down

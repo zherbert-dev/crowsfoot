@@ -1,7 +1,6 @@
-class CreateUsersTable < ActiveRecord::Migration
+class CreateUsersTable < ActiveRecord::Migration[6.0]
   def self.up
     create_table :users do |t|
-      t.id         :id
       t.string     :username
       t.string     :uid
       t.timestamps null: false
