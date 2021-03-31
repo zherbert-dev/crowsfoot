@@ -1,7 +1,6 @@
 require 'active_record'
 
-ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: 'test.db')
+ActiveRecord::Base.establish_connection(adapter: 'mysql', database: 'crowsfoot.db')
 
 class User < ActiveRecord::Base
-  has_one :hero
 end

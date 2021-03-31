@@ -15,8 +15,11 @@ ActiveRecord::Schema.define(version: 2021_03_25_234413) do
   create_table "heroes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.integer "level", default: 1, null: false
-    t.integer "health", default: 25, null: false
-    t.integer "base_damage", default: 3, null: false
+    t.integer "max_health", default: 15, null: false
+    t.integer "current_health", default: 15, null: false
+    t.integer "max_energy", default: 5, null: false
+    t.integer "current_energy", default: 5, null: false
+    t.integer "base_damage", default: 5, null: false
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -43,4 +46,4 @@ ActiveRecord::Schema.define(version: 2021_03_25_234413) do
   end
 
   add_foreign_key "heroes", "users"
-end
+endIM BACK 
